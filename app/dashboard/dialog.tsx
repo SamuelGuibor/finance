@@ -1,6 +1,6 @@
 
 "use client";
-import { useState } from "react";
+import { Button } from "@/app/_components/ui/button"; // Assumindo que você tem um componente Button
 import {
   Dialog,
   DialogContent,
@@ -9,11 +9,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/app/_components/ui/dialog";
+import { Input } from "@/app/_components/ui/input";
+import { Label } from "@/app/_components/ui/label";
 import { Plus } from "lucide-react";
-import { Button } from "@/app/_components/ui/button"; // Assumindo que você tem um componente Button
-import { Input } from "@/app/_components/ui/input"; 
-import { Label } from "@/app/_components/ui/label"; 
-
+import { useState } from "react";
 interface DialogDashProps {
   fixedExpenses: string[];
   adverseExpenses: string[];
