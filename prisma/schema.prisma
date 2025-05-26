@@ -7,28 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Category {
-  id          String @id @default(cuid())
-  name        String? 
-  type        String? 
-  transactions Transaction[] 
+model Transaction {
+  id          String   @id @default(cuid())
+  name        String
+  type        String
+  date        DateTime
+  description String
+  category    String
+  method      String
+  installment String
+  paid        Boolean  @default(false)
+  value       Float 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model Transaction { 
-  id          String  @id @default(cuid())
-  date        DateTime? 
-  description String?  
-  categoryId  String
-  method      String?  
-  installment String?
-  paid        Boolean?
-  value       Decimal? 
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  category Category @relation(fields: [categoryId], references: [id]) 
 }

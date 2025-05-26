@@ -3,6 +3,7 @@
 import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { DayPicker } from "react-day-picker"
+import { ptBR } from "date-fns/locale" // Import the pt-BR locale from date-fns
 
 import { cn } from "@/app/_lib/utils"
 import { buttonVariants } from "@/app/_components/ui/button"
@@ -19,6 +20,7 @@ function Calendar({
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
+      locale={ptBR} // Set the locale to Portuguese (Brazil)
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",

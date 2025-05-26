@@ -3,47 +3,41 @@
 import { db } from "@/app/_lib/prisma";
 
 interface CreatePaymentProps {
+  name: string;
   date: string;
   description: string;
   category: string;
   method: string;
   installment: string;
   paid: boolean;
-  value: number;
+  value: string; // Recebe como string do formulário
+  type: "pagar" | "receber";
 }
 
 export async function CreatePayment(data: CreatePaymentProps) {
   try {
-    // Find the category by name
-    const category = await db.category.findFirst({
-      where: {
-        name: data.category,
-      },
-    });
-
-    // Check if the category exists
-    if (!category) {
-      throw new Error(`Category with name "${data.category}" not found.`);
+    const parsedValue = parseFloat(data.value);
+    if (isNaN(parsedValue)) {
+      return { success: false, error: "Valor inválido" };
     }
 
-    // Create the transaction with the category ID
-    await db.transaction.create({
+    const transaction = await db.transaction.create({
       data: {
+        name: data.name,
         date: new Date(data.date),
         description: data.description,
-        category: {
-          connect: {
-            id: category.id, // Use the category's ID for the connect operation
-          },
-        },
+        category: data.category,
         method: data.method,
         installment: data.installment,
         paid: data.paid,
-        value: data.value,
+        value: parsedValue,
+        type: data.type,
       },
     });
+
+    return { success: true, transaction };
   } catch (error) {
-    console.error("Error creating transaction:", error);
-    throw new Error("Failed to create transaction. Ensure the category exists.");
+    console.error("Erro ao criar transação:", error);
+    return { success: false, error: "Falha ao criar transação" };
   }
 }

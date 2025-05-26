@@ -1,9 +1,23 @@
 "use client";
+
 import FinancialDashboard from "@/app/dashboard/finances";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getPayments } from "@/app/_actions/getPayments";
+
+interface FinancialItem {
+  id: string;
+  name: string;
+  date: string;
+  description: string;
+  category: string;
+  method: string;
+  installment: string;
+  paid: boolean;
+  value: number;
+  type: "pagar" | "receber";
+}
 
 export default function Home() {
-  // ---------- Dropdown options ----------
   const fixedExpenses = [
     "Salarios",
     "Folha de pagamento",
@@ -27,16 +41,50 @@ export default function Home() {
     "processo dpvat",
   ];
 
-  // ---------- Dados fictícios ----------
-  const [payables] = useState([
-    { date: "2025-05-05", description: "Aluguel", category: "Aluguel", method: "Pix", installment: "10/12", paid: true, value: -1200 },
-    { date: "2025-05-12", description: "Energia", category: "Energia", method: "Débito", installment: "1/1", paid: false, value: -350 },
-    { date: "2025-04-15", description: "Internet", category: "Utilitários", method: "Crédito", installment: "1/1", paid: false, value: -120 },
-  ]);
-  const [receivables] = useState([
-    { date: "2025-05-10", description: "Venda Produto A", category: "Vendas", method: "Pix", installment: "1/1", paid: true, value: 800 },
-    { date: "2025-05-20", description: "Serviço Marketing", category: "Serviços", method: "Transf.", installment: "1/1", paid: false, value: 1500 },
-  ]);
+  const [payables, setPayables] = useState<FinancialItem[]>([]);
+  const [receivables, setReceivables] = useState<FinancialItem[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getPayments({});
+        setPayables(data.filter((item) => item.type === "pagar"));
+        setReceivables(data.filter((item) => item.type === "receber"));
+      } catch (error) {
+        console.error("Failed to fetch payments:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const handleDelete = (id: string) => {
+    setPayables(payables.filter((item) => item.id !== id));
+    setReceivables(receivables.filter((item) => item.id !== id));
+  };
+
+  const handleAddPayment = (newPayment: FinancialItem) => {
+    if (newPayment.type === "pagar") {
+      setPayables([...payables, newPayment]);
+    } else {
+      setReceivables([...receivables, newPayment]);
+    }
+  };
+
+  const handleUpdatePayment = (updatedPayment: FinancialItem) => {
+    if (updatedPayment.type === "pagar") {
+      setPayables(
+        payables.map((item) =>
+          item.id === updatedPayment.id ? updatedPayment : item
+        )
+      );
+    } else {
+      setReceivables(
+        receivables.map((item) =>
+          item.id === updatedPayment.id ? updatedPayment : item
+        )
+      );
+    }
+  };
 
   return (
     <FinancialDashboard
@@ -45,6 +93,9 @@ export default function Home() {
       fixedExpenses={fixedExpenses}
       adverseExpenses={adverseExpenses}
       revenues={revenues}
+      onDelete={handleDelete}
+      onAddPayment={handleAddPayment}
+      onUpdatePayment={handleUpdatePayment}
     />
   );
 }
