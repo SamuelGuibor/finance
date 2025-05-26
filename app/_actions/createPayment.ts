@@ -10,7 +10,7 @@ interface CreatePaymentProps {
   method: string;
   installment: string;
   paid: boolean;
-  value: string; // Recebe como string do formulário
+  value: string; 
   type: "pagar" | "receber";
 }
 

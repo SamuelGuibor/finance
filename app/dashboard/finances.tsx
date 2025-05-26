@@ -211,7 +211,6 @@ export default function FinancialDashboard({
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 text-sm text-gray-800">
-      {/* Controles Superiores */}
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
         <button
           onClick={() => setCurrentTab("all")}
