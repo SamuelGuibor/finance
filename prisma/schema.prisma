@@ -1,7 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["driverAdapters"]
-  log = ["query", "info", "warn", "error"]
 }
 
 datasource db {
@@ -19,7 +17,8 @@ model Transaction {
   method      String
   installment String
   paid        Boolean  @default(false)
-  value       Float 
+  value       Float
+  teste       String? 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
