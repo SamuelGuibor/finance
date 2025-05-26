@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { db } from "@/app/_lib/prisma";
@@ -21,6 +22,8 @@ export async function CreatePayment(data: CreatePaymentProps) {
       return { success: false, error: "Valor inválido" };
     }
 
+    console.log("Data recebida:", data.date);
+
     const transaction = await db.transaction.create({
       data: {
         name: data.name,
@@ -36,8 +39,10 @@ export async function CreatePayment(data: CreatePaymentProps) {
     });
 
     return { success: true, transaction };
-  } catch (error) {
-    console.error("Erro ao criar transação:", error);
-    return { success: false, error: "Falha ao criar transação" };
+  } 
+    catch (error: any) {
+        console.error("Erro ao criar transação:", error);
+        return { success: false, error: error.message || "Falha ao criar transação" };
+      
   }
 }
