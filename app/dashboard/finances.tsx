@@ -1,6 +1,8 @@
 "use client";
 import { Check, Circle, Download, Plus } from "lucide-react";
 import { useState } from "react";
+import { Select, SelectContent, SelectTrigger, SelectValue } from "../_components/ui/select";
+
 
 interface FinancialItem {
   date: string;
@@ -62,14 +64,14 @@ export default function FinancialDashboard({
 
   const inflow = currentTab === "all"
     ? currentData
-        .filter(i => i.value > 0 && (i.paid || new Date(i.date) >= new Date()))
-        .reduce((acc, i) => acc + i.value, 0)
+      .filter(i => i.value > 0 && (i.paid || new Date(i.date) >= new Date()))
+      .reduce((acc, i) => acc + i.value, 0)
     : 0;
 
   const outflow = currentTab === "all"
     ? currentData
-        .filter(i => i.value < 0 && (i.paid || new Date(i.date) >= new Date()))
-        .reduce((acc, i) => acc + Math.abs(i.value), 0)
+      .filter(i => i.value < 0 && (i.paid || new Date(i.date) >= new Date()))
+      .reduce((acc, i) => acc + Math.abs(i.value), 0)
     : 0;
 
   return (
@@ -130,19 +132,27 @@ export default function FinancialDashboard({
             </span>
             {(currentTab === "pagar" || currentTab === "all") && (
               <>
-                <select className="rounded bg-white/90 px-2 py-1 text-xs text-black">
-                  <option disabled selected>Despesas Fixas</option>
-                  {fixedExpenses.map((opt) => (
-                    <option key={opt}>{opt}</option>
-                  ))}
-                </select>
+                <Select>
+                  <SelectTrigger className="w-[150px] h-[26px] rounded bg-white/90 text-xs text-black">
+                    <SelectValue placeholder="Despesas Fixas" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {fixedExpenses.map((opt) => (
+                      <option key={opt}>{opt}</option>
+                    ))}
+                  </SelectContent>
+                </Select>
 
-                <select className="rounded bg-white/90 px-2 py-1 text-xs text-black">
-                  <option disabled selected>Adversas</option>
-                  {adverseExpenses.map((opt) => (
-                    <option key={opt}>{opt}</option>
-                  ))}
-                </select>
+                <Select>
+                  <SelectTrigger className="w-[150px] h-[26px] rounded bg-white/90 text-xs text-black">
+                    <SelectValue placeholder="Adversas" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {adverseExpenses.map((opt) => (
+                      <option key={opt}>{opt}</option>
+                    ))}
+                  </SelectContent>
+                </Select>
               </>
             )}
 
