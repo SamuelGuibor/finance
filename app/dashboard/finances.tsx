@@ -1,6 +1,7 @@
 "use client";
-import { Check, Circle, Download, Plus } from "lucide-react";
+import { Check, Circle, Download } from "lucide-react";
 import { useState } from "react";
+import DialogDash from "./dialog";
 
 interface FinancialItem {
   date: string;
@@ -62,16 +63,19 @@ export default function FinancialDashboard({
 
   const inflow = currentTab === "all"
     ? currentData
-        .filter(i => i.value > 0 && (i.paid || new Date(i.date) >= new Date()))
-        .reduce((acc, i) => acc + i.value, 0)
+      .filter(i => i.value > 0 && (i.paid || new Date(i.date) >= new Date()))
+      .reduce((acc, i) => acc + i.value, 0)
     : 0;
 
   const outflow = currentTab === "all"
     ? currentData
-        .filter(i => i.value < 0 && (i.paid || new Date(i.date) >= new Date()))
-        .reduce((acc, i) => acc + Math.abs(i.value), 0)
+      .filter(i => i.value < 0 && (i.paid || new Date(i.date) >= new Date()))
+      .reduce((acc, i) => acc + Math.abs(i.value), 0)
     : 0;
 
+    const handleAddTransaction = async() => {
+      //...
+    }
   return (
     <div className="min-h-screen bg-gray-100 p-4 text-sm text-gray-800">
       <div className="mb-3 flex flex-wrap items-center gap-3">
@@ -154,9 +158,12 @@ export default function FinancialDashboard({
                 ))}
               </select>
             )}
-            <button className="flex items-center gap-1 rounded bg-white/20 px-2 py-1 text-xs hover:bg-white/30">
-              <Plus size={14} /> Novo Pagamento
-            </button>
+            <DialogDash
+              fixedExpenses={fixedExpenses}
+              adverseExpenses={adverseExpenses}
+              revenues={revenues}
+              onAddTransaction={handleAddTransaction} />
+
             <button className="rounded bg-white/20 p-1 hover:bg-white/30">
               <Download size={16} />
             </button>
