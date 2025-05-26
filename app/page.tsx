@@ -31,14 +31,14 @@ export default function Home() {
     "Tafego pago",
     "Assinaturas",
   ];
-  const adverseExpenses = ["equipamento"];
+  const adverseExpenses = ["Equipamento"];
   const revenues = [
-    "ações previdenciarias",
-    "ações securitarias",
-    "açoes judiciais",
-    "vendas de processos",
-    "processos administrativos",
-    "processo dpvat",
+    "Ações Previdenciarias",
+    "Ações Securitarias",
+    "Ações Judiciais",
+    "Vendas de Processos",
+    "Processos Administrativos",
+    "Processo Dpvat",
   ];
 
   const [payables, setPayables] = useState<FinancialItem[]>([]);
