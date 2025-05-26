@@ -1,21 +1,21 @@
 "use client";
-import { useState } from "react";
 import FinancialDashboard from "@/app/dashboard/finances";
+import { useState } from "react";
 
 export default function Home() {
   // ---------- Dropdown options ----------
   const fixedExpenses = [
-    "salarios",
-    "folha de pagamento",
-    "vt",
-    "vr",
-    "internet",
-    "luz",
-    "agua",
-    "bebidas",
-    "papelaria",
-    "tafego pago",
-    "assinaturas",
+    "Salarios",
+    "Folha de pagamento",
+    "Vt",
+    "Vr",
+    "Internet",
+    "Luz",
+    "Agua",
+    "Bebidas",
+    "Papelaria",
+    "Tafego pago",
+    "Assinaturas",
   ];
   const adverseExpenses = ["equipamento"];
   const revenues = [
