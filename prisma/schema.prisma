@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Category {
-  id          Int @id @default(autoincrement())
+  id          String @id @default(cuid())
   name        String? 
   type        String? 
   transactions Transaction[] 
@@ -18,10 +18,10 @@ model Category {
 }
 
 model Transaction { 
-  id          Int @id @default(autoincrement()) 
+  id          String  @id @default(cuid())
   date        DateTime? 
   description String?  
-  categoryId  Int
+  categoryId  String
   method      String?  
   installment String?
   paid        Boolean?
