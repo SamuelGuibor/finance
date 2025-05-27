@@ -273,12 +273,12 @@ export default function FinancialDashboard({
             <hr className="my-2 border-gray-300" />
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               <div className="flex flex-col items-center py-2">
-                <span className="text-green-600 text-base font-semibold">Entradas</span>
-                <span className="text-green-600 text-base">R$ {inflow.toFixed(2)}</span>
+                <span className="text-blue-600 text-base font-semibold">Entradas</span>
+                <span className="text-blue-600 text-[18px] font-bold">R$ {inflow.toFixed(2)}</span>
               </div>
               <div className="flex flex-col items-center py-2">
                 <span className="text-red-600 text-base font-semibold">Saídas</span>
-                <span className="text-red-600 text-base">R$ {outflow.toFixed(2)}</span>
+                <span className="text-red-600 text-[18px] font-bold">R$ {outflow.toFixed(2)}</span>
               </div>
             </div>
           </>
@@ -475,12 +475,12 @@ export default function FinancialDashboard({
             <>
               <hr className="my-2 border-gray-300" />
               <div className="flex justify-between">
-                <span>Entradas</span>
-                <span className="text-green-600">R$ {inflow.toFixed(2)}</span>
+                <span className="text-blue-600 text-[17px] font-semibold">Entradas</span>
+                <span className="text-blue-600 text-[17px] font-bold">R$ {inflow.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between">
-                <span>Saídas</span>
-                <span className="text-red-600">R$ {outflow.toFixed(2)}</span>
+              <div className="flex justify-between pt-2">
+                <span className="text-red-600 text-[17px] font-semibold">Saídas</span>
+                <span className="text-red-600 text-[17px] font-bold">R$ {outflow.toFixed(2)}</span>
               </div>
             </>
           )}
