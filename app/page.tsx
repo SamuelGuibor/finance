@@ -30,6 +30,7 @@ export default function Home() {
     "Papelaria",
     "Tafego pago",
     "Assinaturas",
+    "Outros",
   ];
   const adverseExpenses = ["Equipamento"];
   const revenues = [
@@ -39,6 +40,7 @@ export default function Home() {
     "Vendas de Processos",
     "Processos Administrativos",
     "Processo Dpvat",
+    "Outros",
   ];
 
   const [payables, setPayables] = useState<FinancialItem[]>([]);
