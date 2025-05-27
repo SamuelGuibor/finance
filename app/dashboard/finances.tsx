@@ -254,14 +254,10 @@ export default function FinancialDashboard({
 
       <aside className="mb-4 rounded-xl bg-white p-4 shadow-sm lg:hidden">
         <h2 className="mb-3 text-center text-sm font-bold uppercase text-gray-700">Resumo</h2>
-        <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
+        <div className="grid grid-cols-3 gap-2 lg:grid-cols-4">
           <div className="flex flex-col items-center py-2">
-            <span className="text-green-600 text-base font-semibold">Pago</span>
-            <span className="text-green-600 text-base">R$ {summary.paid.toFixed(2)}</span>
-          </div>
-          <div className="flex flex-col items-center py-2">
-            <span className="text-orange-500 text-base font-semibold">À Vencer</span>
-            <span className="text-orange-500 text-base">R$ {summary.due.toFixed(2)}</span>
+            <span className="text-blue-600 text-base font-semibold">Pago</span>
+            <span className="text-blue-600 text-base">R$ {summary.paid.toFixed(2)}</span>
           </div>
           <div className="flex flex-col items-center py-2">
             <span className="text-red-600 text-base font-semibold">Vencido</span>
@@ -385,8 +381,6 @@ export default function FinancialDashboard({
               )}
             </div>
 
-            
-
             <DialogDash
               fixedExpenses={fixedExpenses}
               adverseExpenses={adverseExpenses}
@@ -431,7 +425,7 @@ export default function FinancialDashboard({
                     <td className="px-3 py-2 text-center sm:px-4">
                       <div onClick={() => togglePay(item.id)} className="cursor-pointer pr-20">
                         {item.paid ? (
-                          <Check className="mx-auto h-5 w-5 text-green-600 sm:h-4 sm:w-4" />
+                          <Check className="mx-auto h-6 w-6 text-green-600 sm:h-6 sm:w-6" />
                         ) : (
                           <IoClose className="mx-auto h-6 w-6 text-red-500 sm:h-5 sm:w-5" />
                         )}
@@ -463,12 +457,8 @@ export default function FinancialDashboard({
           <div className="mb-3 flex flex-col gap-1">
             <h2 className="text-center text-sm font-bold uppercase text-gray-700">Resumo</h2>
             <div className="flex justify-between py-2">
-              <span className="text-green-600 text-[17px]">Pago</span>
-              <span className="text-green-600 text-[17px]">R$ {summary.paid.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between py-2">
-              <span className="text-orange-500 text-[17px]">À Vencer</span>
-              <span className="text-orange-500 text-[17px]">R$ {summary.due.toFixed(2)}</span>
+              <span className="text-blue-600 text-[17px]">Pago</span>
+              <span className="text-blue-600 text-[17px]">R$ {summary.paid.toFixed(2)}</span>
             </div>
             <div className="flex justify-between py-2">
               <span className="text-red-600 text-[17px]">Vencido</span>
@@ -510,7 +500,7 @@ export default function FinancialDashboard({
                   </div>
                 </div>
                 <div onClick={() => deletePay(item.id)} className="cursor-pointer text-red-700">
-                  <FaRegTrashAlt size={14} />
+                  <FaRegTrashAlt size={18} />
                 </div>
               </div>
               <div className="mt-2 grid grid-cols-2 gap-2 text-md">
@@ -530,9 +520,9 @@ export default function FinancialDashboard({
                   <span className="font-medium">Pago:</span>
                   <div onClick={() => togglePay(item.id)} className="cursor-pointer pt-[3px]">
                     {item.paid ? (
-                      <Check className="h-4 w-4 text-green-600" />
+                      <Check className="h-6 w-6 text-green-600" />
                     ) : (
-                      <IoClose className="h-5 w-5 text-red-500" />
+                      <IoClose className="h-6 w-6 text-red-500" />
                     )}
                   </div>
                 </div>
